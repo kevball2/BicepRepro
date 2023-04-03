@@ -209,28 +209,32 @@ Add-Content -Path 'C:\\inetpub\\wwwroot\\index.html' -Value $htmlpage
   }
 }
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: storageAccountName
   location: location
   kind: 'StorageV2'
   sku: {
     name: 'Standard_LRS'
   }
-}
+  properties:{
+    accessTier: 'Cool'
+    allowBlobPublicAccess: true
+    allowSharedKeyAccess: true
+    minimumTlsVersion: 'TLS1_2'
+    supportsHttpsTrafficOnly: true
+    publicNetworkAccess: 'Enabled'
+    networkAcls:{
+      bypass: 'AzureServices'
+      defaultAction: 'Allow'
 
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2021-06-01' = {
-  parent: storageAccount
-  name: 'default'
-}
-
-resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = {
-  name: 'weblogs'
-  parent:blobService
-  properties: {
-    publicAccess: 'None'
+    }
   }
 }
 
+
+  resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = {
+    name: '${storageAccount.name}/default/weblogs'
+  }
 
 resource Microsoft_Insights_VMDiagnosticsSettings 'Microsoft.Compute/virtualMachines/extensions@2020-06-01' = {
   name: 'Microsoft.Insights.VMDiagnosticsSettings'
