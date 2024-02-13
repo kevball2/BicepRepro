@@ -1,0 +1,47 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=kevba
+@GenerationDate=04/03/2023 11:36:22
+@GenerationHost=KEVBALL
+*/
+
+instance of MSFT_WindowsFeature as $MSFT_WindowsFeature1ref
+{
+ResourceID = "[WindowsFeature]WebServer";
+ ModuleVersion = "2.12.0.0";
+ SourceInfo = "F:\\Github\\BicepRepro\\samples\\VMwithDiagnostics\\config\\ConfigureIIS.ps1::10::9::WindowsFeature";
+ Name = "Web-Server";
+ Ensure = "Present";
+ ModuleName = "PSDscResources";
+ ConfigurationName = "ConfigureIIS";
+};
+instance of MSFT_FileDirectoryConfiguration as $MSFT_FileDirectoryConfiguration1ref
+{
+ResourceID = "[File]WebsiteContent";
+ SourceInfo = "F:\\Github\\BicepRepro\\samples\\VMwithDiagnostics\\config\\ConfigureIIS.ps1::16::9::File";
+ SourcePath = "c:\\site\\index.htm";
+ Ensure = "Present";
+ ModuleName = "PSDesiredStateConfiguration";
+ DestinationPath = "c:\\inetpub\\wwwroot";
+
+ModuleVersion = "1.0";
+ ConfigurationName = "ConfigureIIS";
+};
+instance of OMI_ConfigurationDocument
+
+                    {
+ Version="2.0.0";
+
+                        MinimumCompatibleVersion = "1.0.0";
+
+                        CompatibleVersionAdditionalProperties= {"Omi_BaseResource:ConfigurationName"};
+
+                        Author="kevba";
+
+                        GenerationDate="04/03/2023 11:36:22";
+
+                        GenerationHost="KEVBALL";
+
+                        Name="ConfigureIIS";
+
+                    };
